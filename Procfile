@@ -1,1 +1,1 @@
-web: bin/hubot -a campfire -n okusama
+web: bin/hubot -a slack -n okusama
