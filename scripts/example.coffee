@@ -24,9 +24,7 @@ module.exports = (robot) ->
       , 1000
 
   new cron '*/1 * * * * *', () ->
-    robot.messageRoom "akihitotsuboi", "hellow akki-", null, true, "Asia/Tokyo"
-    robot.send {room: "akihitotsuboi"}, "朝会だeお", null, true, "Asia/Tokyo"
-    
+    console.log "hello!, debugging"
   new cron '*/1 * * * * *', () ->
     robot.respond /dm ([^\s]+) (.+)/, (msg) ->
       userName = msg.match[1]
