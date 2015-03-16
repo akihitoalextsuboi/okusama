@@ -22,7 +22,7 @@ module.exports = (robot) ->
     envelope = room: "akihitotsuboi"
     robot.send envelope, "もう帰って来て！"
     console.log "logloglog"
-  cronTest.start()
+  # cronTest.start()
   cronOffice.start()
   cronHome.start()
 
