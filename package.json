@@ -5,6 +5,7 @@
   "author": "rainbowaffro <akihito.tsuboi@gmail.com>",
   "description": "to tell time to go home",
   "dependencies": {
+    "cron": "^1.0.9",
     "hubot": "^2.11.1",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.1.3",

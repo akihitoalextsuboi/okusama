@@ -8,10 +8,30 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+cron = require('cron').CronJob
 module.exports = (robot) ->
+  sendDM = (slackUserName , message) ->
+    userId = robot.adapter.client.getUserByName(slackUserName)?.id
+    return unless userId?
 
-  # robot.hear /badger/i, (msg) ->
-  #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
+    if robot.adapter.client.getDMByID(userId)?
+      robot.send {room: slackUserName}, message
+    else
+      robot.adapter.client.openDM userId
+      # openをハンドルする手段がなさそうなので、仕方なくsetTimeout
+      setTimeout =>
+        robot.send {room: slackUserName}, message
+      , 1000
+
+  new cron '0 * * * * *', () ->
+    robot.respond /dm ([^\s]+) (.+)/, (msg) ->
+      userName = msg.match[1]
+      message = msg.match[2]
+      sendDM userName, message
+    robot.send {room: "akihitotsuboi"}, "朝会だお", null, true, "Asia/Tokyo"
+
+  robot.hear /badger/i, (msg) ->
+    msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #
   # robot.respond /open the (.*) doors/i, (msg) ->
   #   doorType = msg.match[1]
