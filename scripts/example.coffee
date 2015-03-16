@@ -23,7 +23,11 @@ module.exports = (robot) ->
         robot.send {room: slackUserName}, message
       , 1000
 
-  new cron '0 * * * * *', () ->
+  new cron '*/1 * * * * *', () ->
+    msg.send "1分おき"
+  , null, true, "Asia/Tokyo"
+    
+  new cron '*/1 * * * * *', () ->
     robot.respond /dm ([^\s]+) (.+)/, (msg) ->
       userName = msg.match[1]
       message = msg.match[2]
