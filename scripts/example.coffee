@@ -10,11 +10,10 @@
 
 cron = require('cron').CronJob
 module.exports = (robot) ->
-  cronTest = new cronJob('*/1 * * * * *', () =>
+  cronTest = new cron '*/1 * * * * *', () =>
     logger.debug "hereherehere" 
     envelope = room: "akihitotsuboi"
     robot.send envelope, "ここにメッセージを突っ込みます。"
-  )
   cronTest.start()
   sendDM = (slackUserName , message) ->
     userId = robot.adapter.client.getUserByName(slackUserName)?.id
