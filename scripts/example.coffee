@@ -10,7 +10,7 @@
 
 cron = require('cron').CronJob
 module.exports = (robot) ->
-  cronTest = new cron '*/1 * * * * *', () =>
+  cronTest = new cron '* 0 * * * *', () =>
     envelope = room: "akihitotsuboi"
     robot.send envelope, "ここにメッセージを突っ込みます。"
     console.log "logloglog"
