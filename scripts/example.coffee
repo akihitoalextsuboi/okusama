@@ -10,35 +10,26 @@
 
 cron = require('cron').CronJob
 module.exports = (robot) ->
-  cronTest = new cron '* 0 * * * *', () =>
+  cronTest = new cron '0 * * * * *', () =>
     envelope = room: "akihitotsuboi"
-    robot.send envelope, "ここにメッセージを突っ込みます。"
+    robot.send envelope, "ぱねぇ"
+    console.log "logloglog"
+  cronOffice = new cron '* 30 8 * * *', () =>
+    envelope = room: "akihitotsuboi"
+    robot.send envelope, "おはよう！今日もお仕事頑張ってね！"
+    console.log "logloglog"
+  cronHome = new cron '* 30 18 * * *', () =>
+    envelope = room: "akihitotsuboi"
+    robot.send envelope, "もう帰って来て！"
     console.log "logloglog"
   cronTest.start()
-  sendDM = (slackUserName , message) ->
-    userId = robot.adapter.client.getUserByName(slackUserName)?.id
-    return unless userId?
+  cronOffice.start()
+  cronHome.start()
 
-    if robot.adapter.client.getDMByID(userId)?
-      robot.send {room: slackUserName}, message
-    else
-      robot.adapter.client.openDM userId
-      # openをハンドルする手段がなさそうなので、仕方なくsetTimeout
-      setTimeout =>
-        robot.send {room: slackUserName}, message
-      , 1000
 
-  new cron '*/1 * * * * *', () ->
-    console.log "hello!, debugging"
-  new cron '*/1 * * * * *', () ->
-    robot.respond /dm ([^\s]+) (.+)/, (msg) ->
-      userName = msg.match[1]
-      message = msg.match[2]
-      sendDM userName, message
-    robot.send {room: "akihitotsuboi"}, "朝会だお", null, true, "Asia/Tokyo"
 
-  robot.hear /badger/i, (msg) ->
-    msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
+  robot.hear /疲れた/i, (msg) ->
+    msg.send "頑張って"
   #
   # robot.respond /open the (.*) doors/i, (msg) ->
   #   doorType = msg.match[1]
