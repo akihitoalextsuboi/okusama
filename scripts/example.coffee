@@ -11,9 +11,9 @@
 cron = require('cron').CronJob
 module.exports = (robot) ->
   cronTest = new cron '*/1 * * * * *', () =>
-    @robot.logger.debug "hereherehere" 
     envelope = room: "akihitotsuboi"
     robot.send envelope, "ここにメッセージを突っ込みます。"
+    console.log "logloglog"
   cronTest.start()
   sendDM = (slackUserName , message) ->
     userId = robot.adapter.client.getUserByName(slackUserName)?.id
