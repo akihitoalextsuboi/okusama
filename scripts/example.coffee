@@ -14,17 +14,31 @@ module.exports = (robot) ->
   #   envelope = room: "akihitotsuboi"
   #   robot.send envelope, "ぱねぇ"
   #   console.log "logloglog"
-  cronOffice = new cron '0 30 8 * * *', () =>
+  cronOffice1 = new cron '0 30 8 * * *', () =>
+    envelope = room: "akihitotsuboi"
+    robot.send envelope, "おはよう！もう起きてね！"
+  cronOffice2 = new cron '0 00 10 * * *', () =>
     envelope = room: "akihitotsuboi"
     robot.send envelope, "おはよう！今日もお仕事頑張ってね！"
-    console.log "logloglog"
-  cronHome = new cron '0 30 18 * * *', () =>
+  cronHome1 = new cron '0 30 18 * * *', () =>
     envelope = room: "akihitotsuboi"
-    robot.send envelope, "もう帰って来て！"
-    console.log "logloglog"
+    robot.send envelope, "もう定時でしょ？もう帰って来て！"
+  cronHome2 = new cron '0 30 20 * * *', () =>
+    envelope = room: "akihitotsuboi"
+    robot.send envelope, "お腹すいたでしょ？もう帰って来て！"
+  cronHome3 = new cron '0 30 22 * * *', () =>
+    envelope = room: "akihitotsuboi"
+    robot.send envelope, "もう働き過ぎだよ！もう帰って来て！"
+  cronHome4 = new cron '0 30 23 * * *', () =>
+    envelope = room: "akihitotsuboi"
+    robot.send envelope, "もう終電だよ！帰って来て！"
   # cronTest.start()
-  cronOffice.start()
-  cronHome.start()
+  cronOffice1.start()
+  cronOffice2.start()
+  cronHome1.start()
+  cronHome2.start()
+  cronHome3.start()
+  cronHome4.start()
 
 
 
